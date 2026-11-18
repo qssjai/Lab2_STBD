@@ -1,0 +1,9 @@
+"id","email","first_name","last_name","full_name","role_name","created_at","updated_at","updated_by"
+9,"admin@courses.ua","Олена","Коваль","Олена Коваль","admin","2026-11-13 03:07:32.463928",NULL,NULL
+11,"ivanenko@courses.ua","Марія","Іваненко","Марія Іваненко","instructor","2026-11-13 03:07:32.463928",NULL,NULL
+10,"shevchuk@courses.ua","Андрій","Шевчук","Андрій Шевчук","instructor","2026-11-13 03:07:32.463928",NULL,NULL
+14,"taras@student.ua","Тарас","Бондар","Тарас Бондар","student","2026-11-13 03:07:32.463928",NULL,NULL
+13,"dora@student.ua","Дора","Жук","Дора Жук","student","2026-11-13 03:07:32.463928",NULL,NULL
+12,"sofiia@student.ua","Софія","Макарова","Софія Макарова","student","2026-11-13 03:07:32.463928",NULL,NULL
+15,"iryna@student.ua","Ірина","Мельник","Ірина Мельник","student","2026-11-13 03:07:32.463928",NULL,NULL
+16,"oleh@student.ua","Олег","Петренко","Олег Петренко","student","2026-11-13 03:07:32.463928",NULL,NULL

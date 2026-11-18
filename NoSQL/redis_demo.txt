@@ -1,0 +1,58 @@
+DEL cache:courses views:course:6 student:5 activity:student:5 course:6:students course:7:students leaderboard:quiz:3 session:abc
+ 
+ECHO '=== 1. Рядки і TTL: кеш каталогу курсів (SET, GET, TTL, EXISTS, DEL) ==='
+SET cache:courses '[{"id":6,"title":"SQL та PostgreSQL з нуля","price":1250}]' EX 60
+GET cache:courses
+TTL cache:courses
+EXISTS cache:courses
+DEL cache:courses
+EXISTS cache:courses
+ 
+ECHO '=== 2. Лічильники: перегляди курсу (INCR, INCRBY, GET) ==='
+INCR views:course:6
+INCR views:course:6
+INCR views:course:6
+INCRBY views:course:6 10
+GET views:course:6
+ 
+ECHO '=== 3. Хеш: профіль студента (HSET, HGET, HGETALL, HINCRBY) ==='
+HSET student:5 name 'Дора Жук' attempts 12 avg_score 78.5
+HGET student:5 name
+HGETALL student:5
+HINCRBY student:5 attempts 1
+HGET student:5 attempts
+ 
+ECHO '=== 4. Список: стрічка активності (LPUSH, LRANGE, LLEN, LTRIM) ==='
+LPUSH activity:student:5 'почав тест 3' 'завершив тест 3 з балом 92' 'отримав сертифікат'
+LRANGE activity:student:5 0 -1
+LLEN activity:student:5
+LTRIM activity:student:5 0 1
+LRANGE activity:student:5 0 -1
+ 
+ECHO '=== 5. Множини: студенти курсів (SADD, SCARD, SISMEMBER, SINTER, SUNION, SDIFF) ==='
+SADD course:6:students 5 7 9 11
+SADD course:7:students 5 8 11
+SCARD course:6:students
+SISMEMBER course:6:students 7
+SINTER course:6:students course:7:students
+SUNION course:6:students course:7:students
+SDIFF course:6:students course:7:students
+ 
+ECHO '=== 6. Відсортована множина: рейтинг на тесті (ZADD, ZREVRANGE, ZREVRANK, ZINCRBY, ZRANGEBYSCORE) ==='
+ZADD leaderboard:quiz:3 92 student:5 85 student:7 99 student:9 70 student:11
+ZREVRANGE leaderboard:quiz:3 0 2 WITHSCORES
+ZREVRANK leaderboard:quiz:3 student:5
+ZINCRBY leaderboard:quiz:3 10 student:11
+ZRANGEBYSCORE leaderboard:quiz:3 80 100 WITHSCORES
+ZCARD leaderboard:quiz:3
+ 
+ECHO '=== 7. Сесія з обмеженим часом життя (SET EX, TTL, PERSIST, SCAN) ==='
+SET session:abc 'user:5' EX 30
+TTL session:abc
+PERSIST session:abc
+TTL session:abc
+SCAN 0 MATCH student:* COUNT 100
+ 
+DEL cache:courses views:course:6 student:5 activity:student:5 course:6:students course:7:students leaderboard:quiz:3 session:abc
+ECHO '=== Готово, тестові ключі видалено ==='
+ 
